@@ -1,0 +1,57 @@
+package com.d4alencar.crud.dao;
+
+import com.d4alencar.crud.model.Book;
+import com.d4alencar.crud.db.DatabaseConnection;
+
+import java.sql.*;
+import java.util.*;
+
+public class BookDAO {
+
+  public void addBook (Book book) throws SQLException {
+    String sql = "INSERT INTO books (title, year, author) VALUES (?, ?, ?)";
+    try(Connection conn = DatabaseConnection.getConnection()) {
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      stmt.setString(1, book.getTitle());
+      stmt.setInt(2, book.getYear());
+      stmt.setString(3, book.getAuthor());
+      stmt.executeUpdate();
+    }
+  }
+
+  public List<Book> getAllBooks() throws SQLException {
+    String sql = "SELECT * FROM books";
+    List<Book> books = new ArrayList<>();
+    try (Connection conn = DatabaseConnection.getConnection()) {
+      Statement stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery(sql);
+      while (rs.next()) {
+        books.add(new Book(
+        rs.getInt("id"),
+        rs.getString("title"),
+        rs.getInt("year"),
+        rs.getString("author")));
+      }
+    }
+    return books;
+  }
+
+  public void deleteBook (int id) throws SQLException {
+    String sql = "DELETE FROM books WHERE id = ?";
+    try(Connection conn = DatabaseConnection.getConnection()) {
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      stmt.setInt(1, id);
+      stmt.executeUpdate();
+    }
+  }
+
+  public void editTitle (int id, String newTitle) throws SQLException {
+    String sql = "UPDATE books SET title = ? WHERE id = ?";
+    try(Connection conn = DatabaseConnection.getConnection()) {
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      stmt.setString(1, newTitle);
+      stmt.setInt(2, id);
+      stmt.executeUpdate();
+    }
+  }
+}
