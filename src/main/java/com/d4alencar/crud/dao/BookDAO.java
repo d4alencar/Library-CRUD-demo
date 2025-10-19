@@ -20,7 +20,7 @@ public class BookDAO {
   }
 
   public List<Book> getAllBooks() throws SQLException {
-    String sql = "SELECT * FROM books";
+    String sql = "SELECT * FROM books ORDER BY id";
     List<Book> books = new ArrayList<>();
     try (Connection conn = DatabaseConnection.getConnection()) {
       Statement stmt = conn.createStatement();
@@ -51,6 +51,18 @@ public class BookDAO {
       PreparedStatement stmt = conn.prepareStatement(sql);
       stmt.setString(1, newTitle);
       stmt.setInt(2, id);
+      stmt.executeUpdate();
+    }
+  }
+
+  public void editBook (Book book) throws SQLException {
+    String sql = "UPDATE books SET title = ?, year = ?, author = ? WHERE id = ?";
+    try(Connection conn = DatabaseConnection.getConnection()) {
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      stmt.setString(1, book.getTitle());
+      stmt.setInt(2, book.getYear());
+      stmt.setString(3, book.getAuthor());
+      stmt.setInt(4, book.getId());
       stmt.executeUpdate();
     }
   }

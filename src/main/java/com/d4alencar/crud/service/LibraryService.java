@@ -6,19 +6,31 @@ import com.d4alencar.crud.model.Book;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
+
+
 public class LibraryService {
   private final BookDAO bookDAO = new BookDAO();
 
-  public void addBook(Book book) {
+  public DefaultListModel<Book> model = new DefaultListModel<>();
+
+  public LibraryService () {
+    getAllBooks();
+  }
+
+  public boolean addBook(Book book) {
     try {
       bookDAO.addBook(book);
+      model.addElement(book);
       System.out.println("book added successfully!");
     } catch (SQLException e) {
       System.out.println("Error adding book: " + e.getMessage());
+      return false;
     }
+    return true;
   }
 
-  public void listBooks() {
+  /*public void listBooks() {
     try {
       List<Book> books = bookDAO.getAllBooks();
       for (Book b : books) {
@@ -27,23 +39,40 @@ public class LibraryService {
     } catch (SQLException e) {
       System.out.println("Error retrieving books: " + e.getMessage());
     }
+  }*/
+
+  public void getAllBooks() {
+    try {
+      List<Book> booksBuffer = bookDAO.getAllBooks();
+      for (Book b : booksBuffer) {
+        model.addElement(b);
+      }
+    } catch (SQLException e) {
+      System.out.println("Error retrieving books: " + e.getMessage());
+    }
   }
 
-  public void deleteBook(int id) {
+  public boolean deleteBook(int id) {
     try {
-      bookDAO.deleteBook(id);
+      Book selectedBook = model.get(id);
+      bookDAO.deleteBook(selectedBook.getId());
+      model.remove(id);
       System.out.println("Book deleted!");
     } catch (SQLException e) {
       System.out.println("Error deleting book: " + e.getMessage());
+      return false;
     }
+    return true;
   }
 
-  public void editTitle(int id, String newTitle) {
+  public boolean editBook (int id, Book book) {
     try {
-      bookDAO.editTitle(id, newTitle);
-      System.out.println("Book edited.");
+      bookDAO.editBook(book);
+      model.set(id, book);
     } catch (SQLException e) {
       System.out.println("Error editing book: " + e.getMessage());
+      return false;
     }
+    return true;
   }
 }
