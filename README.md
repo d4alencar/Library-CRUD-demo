@@ -16,3 +16,13 @@ This project was created as part of my studies to improve my programming skills 
 - [ ] add search tool
 - [ ] handle unexpected behaviour
 - [ ] improve GUI
+
+## tech stack
+
+| Layer | Technology |
+|-------|-------------|
+| Language | Java (JDK 21) |
+| GUI | Swing |
+| Database | PostgreSQL |
+| IDE | LunarVim |
+| Build Tool | Maven |
