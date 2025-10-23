@@ -8,15 +8,23 @@ import java.util.*;
 
 public class BookDAO {
 
-  public void addBook (Book book) throws SQLException {
+  public int addBook (Book book) throws SQLException {
     String sql = "INSERT INTO books (title, year, author) VALUES (?, ?, ?)";
+    int idBuffer = 0;
     try(Connection conn = DatabaseConnection.getConnection()) {
-      PreparedStatement stmt = conn.prepareStatement(sql);
+      PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
       stmt.setString(1, book.getTitle());
       stmt.setInt(2, book.getYear());
       stmt.setString(3, book.getAuthor());
       stmt.executeUpdate();
+      
+      ResultSet rs = stmt.getGeneratedKeys();
+      if(rs.next()) {
+        idBuffer = rs.getInt(1);
+      }
     }
+    return idBuffer;
+
   }
 
   public List<Book> getAllBooks() throws SQLException {

@@ -20,8 +20,9 @@ public class LibraryService {
 
   public boolean addBook(Book book) {
     try {
-      bookDAO.addBook(book);
-      model.addElement(book);
+      int idB = bookDAO.addBook(book);
+      Book b = new Book(idB, book.getTitle(), book.getYear(), book.getAuthor());
+      model.addElement(b);
       System.out.println("book added successfully!");
     } catch (SQLException e) {
       System.out.println("Error adding book: " + e.getMessage());
