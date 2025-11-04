@@ -18,12 +18,15 @@ public class Book {
   public int getYear() {return year;}
   public String getAuthor() {return author;}
 
-  public void editTitle(String title) {
-    this.title = title;
+  public boolean checkInfo () {
+    if(this.title == "" || this.author == "") {
+      return false;
+    }
+    return true;
   }
 
   @Override
   public String toString() {
-    return title + " by: " + author + " (" + year + ")";
+    return "[" + id + "] " + title + " by: " + author + " (" + year + ")";
   }
 }

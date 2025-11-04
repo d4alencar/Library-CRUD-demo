@@ -31,17 +31,6 @@ public class LibraryService {
     return true;
   }
 
-  /*public void listBooks() {
-    try {
-      List<Book> books = bookDAO.getAllBooks();
-      for (Book b : books) {
-        System.out.println(b.getId() + ": " + b.getTitle() + " (" + b.getYear() + ") by " + b.getAuthor());
-      }
-    } catch (SQLException e) {
-      System.out.println("Error retrieving books: " + e.getMessage());
-    }
-  }*/
-
   public void getAllBooks() {
     try {
       List<Book> booksBuffer = bookDAO.getAllBooks();
@@ -68,12 +57,33 @@ public class LibraryService {
 
   public boolean editBook (int id, Book book) {
     try {
-      bookDAO.editBook(book);
-      model.set(id, book);
+      if(!book.toString().equals(model.getElementAt(id).toString())) {
+        bookDAO.editBook(book);
+        model.set(id, book);
+      } else {
+        return false;
+      }
     } catch (SQLException e) {
       System.out.println("Error editing book: " + e.getMessage());
       return false;
     }
     return true;
+  }
+
+  public void searchBook (String key, String option) {
+    try {
+      if(!key.isEmpty()) {
+        model.clear();
+        List<Book> booksBuffer = bookDAO.searchBook(key, option);
+        for (Book b : booksBuffer) {
+          model.addElement(b);
+        }
+      } else {
+        model.clear();
+        getAllBooks();
+      }
+    } catch (SQLException e) {
+      System.out.println("Error searching book: " + e.getMessage());
+    }
   }
 }
