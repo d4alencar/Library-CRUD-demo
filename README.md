@@ -5,7 +5,6 @@ A simple CRUD desktop application to manage library's books
 
 ## PURPOSE
 This project was created as part of my studies to improve my programming skills and:
-- understand MVC architecture
 - database integration and SQL
 - build tool
 - git and github workflow
