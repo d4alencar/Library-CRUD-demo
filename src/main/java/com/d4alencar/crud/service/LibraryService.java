@@ -1,6 +1,7 @@
 package com.d4alencar.crud.service;
 
 import com.d4alencar.crud.dao.BookDAO;
+import com.d4alencar.crud.db.DatabaseConnection;
 import com.d4alencar.crud.model.Book;
 
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ public class LibraryService {
   public DefaultListModel<Book> model = new DefaultListModel<>();
 
   public LibraryService () {
+    createTable();
     getAllBooks();
   }
 
@@ -84,6 +86,14 @@ public class LibraryService {
       }
     } catch (SQLException e) {
       System.out.println("Error searching book: " + e.getMessage());
+    }
+  }
+
+  public static void createTable() {
+    try {
+      DatabaseConnection.instanceTable();
+    } catch (SQLException e) {
+      System.out.println("Error creating table: " + e.getMessage());
     }
   }
 }

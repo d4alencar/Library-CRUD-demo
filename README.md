@@ -1,22 +1,21 @@
-# Library CRUD 
+# CRUD desktop app
 A simple CRUD desktop application to manage library's books
 
-<img src="imgs/example1.png" alt="image example">
+<img src="imgs/example1.png" alt="app">
 
-## PURPOSE
-This project was created as part of my studies to improve my programming skills and:
-- database integration and SQL
-- build tool
-- git and github workflow
-- docker
+## Usage
+This project depend on [Java 21](https://www.oracle.com/br/java/technologies/downloads/), [Maven](https://github.com/apache/maven), 
+[Docker](https://github.com/docker/compose) to run, certify to have it on your machine.
 
-## next steps
+Clone the repo 'git clone https://github.com/d4alencar/crud_desktop' and change directory 'cd crud_desktop'
+
+### next steps
 - [ ] treat SQL Injections
-- [ ] add search tool
-- [ ] handle unexpected behaviour
+- [x] add search tool
+- [x] handle unexpected behaviour
 - [ ] improve GUI
 
-## tech stack
+### tech stack
 
 | Layer | Technology |
 |-------|-------------|
