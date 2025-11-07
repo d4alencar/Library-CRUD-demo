@@ -7,7 +7,7 @@ A simple CRUD desktop application to manage library's books
 This project depend on [Java 21](https://www.oracle.com/br/java/technologies/downloads/), [Maven](https://github.com/apache/maven), 
 [Docker](https://github.com/docker/compose) to run, certify to have it on your machine.
 
-Clone the repo 'git clone https://github.com/d4alencar/crud_desktop' and change directory 'cd crud_desktop'
+Clone the repo `git clone https://github.com/d4alencar/crud_desktop` and change directory `cd crud_desktop`
 
 ### next steps
 - [ ] treat SQL Injections
