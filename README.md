@@ -1,14 +1,19 @@
 # Usage
-This project depend on [Java 21](https://www.oracle.com/br/java/technologies/downloads/), [Maven](https://github.com/apache/maven), 
-[Docker](https://github.com/docker/compose) to run, certify to have it on your machine.
+First of all make sure [Java 21](https://www.oracle.com/br/java/technologies/downloads/), [Maven](https://github.com/apache/maven), [Docker](https://github.com/docker/compose) is installed on your computer.
 
-Clone the repository and change to its folder
-```
+`clone` the repository and change to its directory, then the postgreSQL container up 
+```bash
+#clone the repo
 git clone github.com/d4alencar/crud_desktop
+
+#change to its directory
 cd crud_desktop
+
+#initialize container
+docker compose up -d
 ```
+
 ```
-docker compose up
 mvn clean
 mvn compile exec:java
 ```
