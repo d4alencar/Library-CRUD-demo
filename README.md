@@ -22,8 +22,9 @@ mvn clean
 mvn compile exec:java
 ```
 
-##Screenshots
+## Screenshots
 <img src="imgs/example1.png" alt="example1" />
+
 <img src="imgs/example2.png" alt="add dialog" />
 
 ### next steps
