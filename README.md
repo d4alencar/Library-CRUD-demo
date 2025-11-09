@@ -22,6 +22,10 @@ mvn clean
 mvn compile exec:java
 ```
 
+##Screenshots
+<img src="imgs/example1.png" alt="example1" />
+<img src="imgs/example2.png" alt="add dialog" />
+
 ### next steps
 - [ ] treat SQL Injections
 - [x] add search tool
